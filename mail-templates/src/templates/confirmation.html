@@ -1,0 +1,102 @@
+---
+title: 'Confirm your email address' preheader: 'Please confirm your email
+address in order to activate your account' 
+bodyClass: bg-slate-50 
+---
+
+<extends src="src/layouts/main.html">
+  <block name="template">
+    <table class="w-full font-sans">
+      <tr>
+        <td align="center" class="bg-slate-50">
+          <table class="w-150 sm:wf-full">
+            <tr>
+              <td class="p-12 sm:py-8 sm:px-6 text-center">
+                <a href="https://hotcodesagency.com">
+                  <img
+                    src="https://res.cloudinary.com/didh3wbru/image/upload/v1675891221/Fichier_3_15x_1_mxqrmo.png"
+                    width="100"
+                    class="max-w-full align-middle [border:0]"
+                    alt=""
+                  />
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" class="sm:px-6">
+                <table class="w-full">
+                  <tr>
+                    <td
+                      class="p-12 sm:px-6 bg-white text-green-700 text-base text-left leading-6 rounded shadow-sm"
+                    >
+                      <p>Bonjour, @{{firstname}} @{{lastname}}</p>
+                      <p
+                        class="text-2xl sm:leading-8 text-black font-semibold m-0 mb-6"
+                      >
+                        Reinitialiser votre mot de passe ?
+                      </p>
+                      <p class="m-0 mb-6">
+                        Veuillez confirmer votre adresse e-mail en cliquant sur
+                        le bouton ci-dessous:
+                      </p>
+                      <div class="leading-full">
+                        <a
+                          href="@{{url}}"
+                          class="inline-blc py-3.5 px-4 rounded text-base font-semibold text-center [text-decoration:none] text-white bg-green-600 hover:bg-green-500"
+                        >
+                          <outlook>
+                            <i
+                              class="tracking-6 -mso-font-width-full mso-text-raise-7.5"
+                              >&#8202;</i
+                            >
+                          </outlook>
+                          <span class="mso-text-raise-4"
+                            >Confirmez votre address email &rarr;</span
+                          >
+                          <outlook>
+                            <i class="tracking-6 -mso-font-width-full"
+                              >&#8202;</i
+                            >
+                          </outlook>
+                        </a>
+                      </div>
+                      <table
+                        class="w-full"
+                        role="sep
+                    "
+                      >
+                        <tr>
+                          <td class="py-8">
+                            <div class="bg-slate-200 h-px leading-px">
+                              &zwnj;
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                      <p class="m-0 mb-4">
+                        Si vous n’avez pas signé pour Maizzle, vous pouvez
+                        ignorer cet email
+                      </p>
+                      <p>
+                        Merci, <br />
+                        L’équipe de Marchesn
+                      </p>
+                    </td>
+                  </tr>
+                  <tr role="separator">
+                    <td class="h-12"></td>
+                  </tr>
+                  <tr>
+                    <td class="text-center text-green-600 text-xs px-6">
+                      <p class="m-0 mb-4 uppercase">Powered by MarcheSN</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </block>
+</extends>
