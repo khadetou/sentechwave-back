@@ -31,6 +31,7 @@ export class AuthService {
   // GET ALL USER Admin
   async getAllUsers(): Promise<User[]> {
     // get alll users except where user is admin
+
     return await this.userModel.find({ roles: { $ne: 'admin' } }).exec();
   }
 

@@ -36,8 +36,23 @@ export class UpdateProductDto {
   description: string;
 
   @IsOptional()
-  @IsString()
+  specification: any;
+
+  @IsOptional()
+  @IsString({ each: true })
   sizes: string[];
+
+  @IsOptional()
+  @IsString({ each: true })
+  styles: string[];
+
+  @IsOptional()
+  @IsString({ each: true })
+  colors: string[];
+
+  @IsOptional()
+  @IsString()
+  sku: string;
 
   @IsNumber()
   @IsOptional()

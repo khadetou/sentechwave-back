@@ -34,16 +34,12 @@ export class ProductsService {
         }
       : {};
 
-    category = category
-      ? { category: { $regex: category, $options: '^' } }
-      : {};
-
-    souscategory = souscategory
-      ? { souscategory: { $regex: souscategory, $options: '^' } }
-      : {};
-    ssouscategory = ssouscategory
-      ? { ssouscategory: { $regex: ssouscategory, $options: '^' } }
-      : {};
+    category = category ? { category: category } : {};
+    souscategory = souscategory ? { souscategory: souscategory } : {};
+    ssouscategory = ssouscategory ? { ssouscategory: ssouscategory } : {};
+    // ssouscategory = ssouscategory
+    //   ? { ssouscategory: { $regex: ssouscategory, $options: '^' } }
+    //   : {};
 
     const price =
       min && max ? { price: { $gte: Number(min), $lte: Number(max) } } : {};
@@ -72,21 +68,24 @@ export class ProductsService {
       brand,
       category,
       description,
+      specification,
       rating,
       price,
       oldPrice,
       sizes,
+      colors,
+      sku,
+      styles,
       subsubcategory,
       subcategory,
       countInStock,
     } = createProductDto;
-
     const imageLinks: any[] = [];
 
     if (images) {
       for (let i = 0; i < images.length; i++) {
         const upload = await v2.uploader.upload(images[i], {
-          folder: `marchesn/products/${category}`,
+          folder: `sentechwave/products/${category}`,
         });
 
         imageLinks.push({
@@ -102,14 +101,18 @@ export class ProductsService {
     const productField = {
       user: user._id,
       name: name && name,
+      sku: sku && sku,
       images: imageLinks,
       brand: brand && brand,
-      category: category && category,
-      subcategory: subcategory && subcategory,
-      subsubcategory: subsubcategory && subsubcategory,
+      category: category !== '' ? category : undefined,
+      subcategory: subcategory !== '' ? subcategory : undefined,
+      subsubcategory: subsubcategory !== '' ? subsubcategory : undefined,
       description: description && description,
+      specification: specification && specification,
       rating: rating && rating,
       sizes: sizes && sizes,
+      colors: colors && colors,
+      styles: styles && styles,
       price: price && price,
       oldPrice: oldPrice && oldPrice,
       countInStock: countInStock && countInStock,
@@ -135,11 +138,15 @@ export class ProductsService {
       brand,
       category,
       description,
+      specification,
       subcategory,
       subsubcategory,
       rating,
       price,
+      sku,
       sizes,
+      colors,
+      styles,
       countInStock,
       oldPrice,
     } = updateProductDto;
@@ -155,7 +162,7 @@ export class ProductsService {
 
       for (let i = 0; i < images.length; i++) {
         const upload = await v2.uploader.upload(images[i], {
-          folder: `marchesn/products/${category}`,
+          folder: `sentechwave/products/${category}`,
         });
 
         imageLinks.push({
@@ -170,15 +177,19 @@ export class ProductsService {
 
     if (product) {
       product.name = name || product.name;
+      product.sku = sku && product.sku;
       product.images = imageLinks.length !== 0 ? imageLinks : product.images;
       product.brand = brand || brand;
       product.category = category || product.category;
       product.description = description || product.description;
+      product.specification = specification || product.specification;
       product.subcategory = subcategory || product.subcategory;
       product.subsubcategory = subsubcategory || product.subsubcategory;
       product.rating = rating || product.rating;
       product.price = price || product.price;
       product.sizes = sizes || product.sizes;
+      product.styles = styles || product.styles;
+      product.colors = colors || product.colors;
       product.oldPrice = oldPrice || product.oldPrice;
       product.countInStock = countInStock || product.countInStock;
     } else {
@@ -235,7 +246,11 @@ export class ProductsService {
   //GET PRODUCT BY ID
 
   async getProductById(id: string): Promise<Product> {
-    const product = await this.productModel.findById(id);
+    const product = await this.productModel
+      .findById(id)
+      .populate('category')
+      .populate('subcategory')
+      .exec();
     if (product) {
       return product;
     } else {

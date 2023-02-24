@@ -34,6 +34,9 @@ export class CreateProductDto {
   @IsNotEmpty()
   description: string;
 
+  @IsOptional()
+  specification: any;
+
   @IsNumber()
   @IsOptional()
   rating: number;
@@ -43,8 +46,20 @@ export class CreateProductDto {
   price: number;
 
   @IsOptional()
+  @IsString({ each: true })
+  sizes: string[];
+
+  @IsOptional()
+  @IsString({ each: true })
+  styles: string[];
+
+  @IsOptional()
+  @IsString({ each: true })
+  colors: string[];
+
+  @IsOptional()
   @IsString()
-  sizes: string;
+  sku: string;
 
   @IsNumber()
   @IsOptional()

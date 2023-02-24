@@ -68,7 +68,7 @@ export class Product {
 
   @Prop({
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'category',
+    ref: 'ProductCategory',
     required: true,
   })
   category: ProductCategory;
@@ -76,12 +76,33 @@ export class Product {
   @Prop({ type: String, required: true })
   description: string;
 
+  @Prop({ type: {}, trim: true })
+  specification: {};
+
   @Prop({
     type: [String],
     default: '',
     required: false,
   })
   sizes: string[];
+
+  @Prop({
+    type: [String],
+    required: false,
+  })
+  styles: string[];
+
+  @Prop({
+    type: [String],
+    required: false,
+  })
+  colors: string[];
+
+  @Prop({
+    type: String,
+    required: false,
+  })
+  sku: string;
 
   @Prop([Reviews])
   reviews: Reviews[];
