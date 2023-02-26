@@ -222,7 +222,6 @@ export class ProductsService {
           'Vous avez dèjas donné votre avis sur ce produit !',
         );
       }
-
       product.reviews.push({
         user: user._id,
         name: user.firstname + ' ' + user.lastname,
@@ -250,6 +249,7 @@ export class ProductsService {
       .findById(id)
       .populate('category')
       .populate('subcategory')
+      .populate('reviews.user')
       .exec();
     if (product) {
       return product;
