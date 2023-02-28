@@ -60,7 +60,7 @@ export class OrderService {
   async getOrderById(id: string): Promise<Order> {
     const order = await this.orderModel
       .findById(id)
-      .populate('user', 'firstname lastname email');
+      .populate('user', 'firstname lastname email phone');
     if (order) {
       return order;
     } else {
